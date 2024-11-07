@@ -42,7 +42,7 @@ class InventoryPage(BasePage):
         super().__init__(driver, timeout=60)
 
         self.item = (By.ID, 'item_4_title_link') #Заголовок любого товара: Здесь будет локатор по ID
-        self.add_jacket_to_cart_btn = (By.XPATH, '//button[@id="add-to-cart-sauce-labs-fleece-jacket"]') #Кнопка Add to Cart для Sauce Labs Fleece Jacket: Здесь будет локатор XPATH
+        self.add_jacket_to_cart_btn = (By.XPATH, '//*[@id="add-to-cart-sauce-labs-fleece-jacket"]') #Кнопка Add to Cart для Sauce Labs Fleece Jacket: Здесь будет локатор XPATH
         self.cart_btn = (By.XPATH, '//*[@class="shopping_cart_link"]') #Кнопка корзины: Здесь будет локатор XPATH
 
     def choose_item(self):
@@ -71,7 +71,7 @@ class CartPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, timeout=60)
 
-        self.item_list = (By.XPATH, '//div[@class="cart_item"][position() <= 2]')    #Локатор XPATH элемента продукта. Локатор должен находить
+        self.item_list = (By.XPATH, '//div[@class="cart_item"]')    #Локатор XPATH элемента продукта. Локатор должен находить
                             # ровно 2 элемента на странице: первый и второй товар
                             # то есть в DevTools вы должны видеть "1 of 2" при поиске данного локатора
 
