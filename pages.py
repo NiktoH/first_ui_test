@@ -12,17 +12,14 @@ class BasePage:
         self.wait = WebDriverWait(driver, timeout)
         self.page_url = ''
 
-    @allure.step(r'Найти элемент')
     def find_element(self, by: By or int, value: str) -> WebElement:
         return self.wait.until(expected_conditions.visibility_of_element_located((by, value)),
                                message=f'Элемент {by, value} не найден')
 
-    @allure.step(r'Найти элементы')
     def find_elements(self, by: By or int, value: str) -> [WebElement]:
         return self.wait.until(expected_conditions.visibility_of_all_elements_located((by, value)),
                                message=f'Элементы {by, value} не найдены')
 
-    @allure.step(r'Получить текущий url')
     def get_current_url(self) -> str:
         return self.driver.current_url
 
@@ -77,11 +74,14 @@ class InventoryPage(BasePage):
 
     @allure.step(r"Проверить, что открыта страница 'https://www.saucedemo.com/inventory.html'")
     def check_inventory_page_open(self) -> bool:
-        return self.get_current_url() == self.page_url
+        with allure.step(r"Проверка..."):
+            assert self.get_current_url() == self.page_url, "Ошибка проверки!"
 
     @allure.step(r"Проверить, что страница 'https://www.saucedemo.com/inventory.html' не открыта")
     def check_inventory_page_close(self) -> bool:
-        return self.get_current_url() != self.page_url
+        with allure.step(r"Проверка..."):
+            assert self.get_current_url() != self.page_url, "Ошибка проверки!"
+
 
 class ItemPage(BasePage):
     def __init__(self, driver):
@@ -107,5 +107,5 @@ class CartPage(BasePage):
                             # то есть в DevTools вы должны видеть "1 of 2" при поиске данного локатора
 
     @allure.step(r'Найти количество товаров')
-    def number_of_products(self):
+    def number_of_products(self) -> int:
         return len(self.find_elements(*self.item_list))

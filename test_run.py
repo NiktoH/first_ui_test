@@ -1,6 +1,8 @@
 from pages import BasePage, LoginPage, InventoryPage, ItemPage, CartPage
+import allure
 
 
+@allure.title(r"Тест сайта")
 def test_est_1_login(driver):
     auth_page = LoginPage(driver)
     auth_page.auth('standard_user', 'secret_sauce')
@@ -19,19 +21,21 @@ def test_est_1_login(driver):
     assert cart_page.number_of_products() == 2
 
 
+@allure.title(r"Тест авторизации")
 def test_auth(driver):
     auth_page = LoginPage(driver)
     auth_page.input_login('standard_user')
     auth_page.input_password('secret_sauce')
     auth_page.login_button_click()
 
-    assert InventoryPage(driver).check_inventory_page_open()
+    InventoryPage(driver).check_inventory_page_open()
 
 
+@allure.title(r"Тест неправильной авторизации")
 def test_fail_auth(driver):
     auth_page = LoginPage(driver)
     auth_page.input_login('standard_user')
     auth_page.input_password('BestPassword123')
     auth_page.login_button_click()
 
-    assert InventoryPage(driver).check_inventory_page_close()
+    InventoryPage(driver).check_inventory_page_close()
