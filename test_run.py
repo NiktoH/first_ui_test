@@ -2,7 +2,7 @@ from pages import BasePage, LoginPage, InventoryPage, ItemPage, CartPage
 import allure
 
 
-@allure.title(r"Тест сайта")
+@allure.title(r"Проверка добавления товаров в корзину")
 def test_est_1_login(driver):
     auth_page = LoginPage(driver)
     auth_page.auth('standard_user', 'secret_sauce')
@@ -18,10 +18,11 @@ def test_est_1_login(driver):
     inventory_page.cart_btn_click()
 
     cart_page = CartPage(driver)
-    assert cart_page.number_of_products() == 2
+    with allure.step(r"Проверка количества товаров"):
+        assert cart_page.number_of_products() == 2, "Неверное количество элементов в корзине"
 
 
-@allure.title(r"Тест авторизации")
+@allure.title(r"Проверка авторизации с правильными данными")
 def test_auth(driver):
     auth_page = LoginPage(driver)
     auth_page.input_login('standard_user')
@@ -31,7 +32,7 @@ def test_auth(driver):
     InventoryPage(driver).check_inventory_page_open()
 
 
-@allure.title(r"Тест неправильной авторизации")
+@allure.title(r"Проверка авторизации с неправильными данными")
 def test_fail_auth(driver):
     auth_page = LoginPage(driver)
     auth_page.input_login('standard_user')

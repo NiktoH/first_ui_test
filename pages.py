@@ -74,13 +74,11 @@ class InventoryPage(BasePage):
 
     @allure.step(r"Проверить, что открыта страница 'https://www.saucedemo.com/inventory.html'")
     def check_inventory_page_open(self) -> bool:
-        with allure.step(r"Проверка..."):
-            assert self.get_current_url() == self.page_url, "Ошибка проверки!"
+        assert self.get_current_url() == self.page_url, "Ошибка проверки!"
 
     @allure.step(r"Проверить, что страница 'https://www.saucedemo.com/inventory.html' не открыта")
     def check_inventory_page_close(self) -> bool:
-        with allure.step(r"Проверка..."):
-            assert self.get_current_url() != self.page_url, "Ошибка проверки!"
+        assert self.get_current_url() != self.page_url, "Ошибка проверки!"
 
 
 class ItemPage(BasePage):
