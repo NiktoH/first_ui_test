@@ -1,6 +1,8 @@
 import allure
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webelement import WebElement
+
 from pages.BasePage import BasePage
 
 
@@ -8,23 +10,23 @@ class FinishPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver, timeout=60)
 
-        self.check_title_field = (By.XPATH, '//*[@class="title"]')
-        self.check_complete_header = (By.XPATH, '//h2[@class="complete-header"]')
-        self.check_complete_text = (By.XPATH, '//*[@class="complete-text"]')
-        self.check_back_home_btn = (By.ID, 'back-to-products')
+        self.title_field = (By.XPATH, '//*[@class="title"]')
+        self.complete_header = (By.XPATH, '//h2[@class="complete-header"]')
+        self.complete_text = (By.XPATH, '//*[@class="complete-text"]')
+        self.back_home_btn = (By.ID, 'back-to-products')
 
     @allure.step(r"Проверить наличие поля Checkout: Complete!")
-    def check_title(self):
-        return self.find_element(*self.check_title_field).text
+    def check_title(self) -> str:
+        return self.find_element(*self.title_field).text
 
-    @allure.step(r"Проверить наличие заголовка Thank you for your order!")
-    def find_complete_header(self):
-        return self.find_element(*self.check_complete_header).text
+    @allure.step(r"Получить заголовок Thank you for your order!")
+    def get_complete_header(self) -> str:
+        return self.find_element(*self.complete_header).text
 
     @allure.step(r"Проверить наличие заголовка Your order has been dispatched, and will arrive just as fast as the pony can get there!")
-    def find_complete_text(self):
-        return self.find_element(*self.check_complete_text).text
+    def get_complete_text(self) -> str:
+        return self.find_element(*self.complete_text).text
 
     @allure.step(r"Проверить наличие кнопки Back Home")
-    def find_back_home_btn(self):
-        return self.find_element(*self.check_back_home_btn)
+    def find_back_home_btn(self) -> WebElement:
+        return self.find_element(*self.back_home_btn)

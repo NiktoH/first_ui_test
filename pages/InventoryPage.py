@@ -9,7 +9,7 @@ class InventoryPage(BasePage):
         super().__init__(driver, timeout=60)
 
         self.add_tshirt_to_cart_btn = (By.XPATH, '//*[@id="add-to-cart-sauce-labs-bolt-t-shirt"]')
-        self.check_cart_number = (By.XPATH, '//*[@class="shopping_cart_link"]/span[contains(text(), "1")]')
+        self.cart_number = (By.XPATH, '//*[@class="shopping_cart_badge"]')
         self.cart_btn = (By.XPATH, '//*[@class="shopping_cart_link"]')
 
     @allure.step(r"Добавить футболку в корзину")
@@ -17,8 +17,8 @@ class InventoryPage(BasePage):
         self.find_element(*self.add_tshirt_to_cart_btn).click()
 
     @allure.step(r"Найти цифру рядом с корзиной")
-    def find_cart_number(self):
-        return len(self.find_elements(*self.check_cart_number))
+    def find_cart_number(self) -> str:
+        return self.find_element(*self.cart_number).text
 
     @allure.step(r"Кликнуть по корзине")
     def cart_btn_click(self):

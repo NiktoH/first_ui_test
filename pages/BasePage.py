@@ -21,3 +21,16 @@ class BasePage:
 
     def get_current_url(self) -> str:
         return self.driver.current_url
+
+    def click_element(self, locator):
+        element = self.find_element(*locator)
+        element.click()
+
+    def fill_field(self, locator, value):
+        field = self.find_element(*locator)
+        field.clear()  # очищаем поле перед вводом
+        field.send_keys(value)
+
+    def get_text(self, locator):
+        element = self.find_element(*locator)
+        return element.text

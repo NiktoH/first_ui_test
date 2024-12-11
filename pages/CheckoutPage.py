@@ -16,9 +16,12 @@ class CheckoutPage(BasePage):
 
     @allure.step(r"Ввести Имя, Фамилию, Код")
     def checkout_auth(self, first_name: str, last_name: str, postal_code: str) -> None:
-        self.find_element(*self.first_name).send_keys(first_name)
-        self.find_element(*self.last_name).send_keys(last_name)
-        self.find_element(*self.postal_code).send_keys(postal_code)
+        # self.find_element(*self.first_name).send_keys(first_name)
+        # self.find_element(*self.last_name).send_keys(last_name)
+        # self.find_element(*self.postal_code).send_keys(postal_code)
+        self.fill_field(self.first_name, 'Masha')
+        self.fill_field(self.last_name, 'Smirnova')
+        self.fill_field(self.postal_code, '432001')
 
 
     @allure.step(r"Кликнуть по кнопке continue")

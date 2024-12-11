@@ -13,7 +13,10 @@ class LoginPage(BasePage):
         self.login_btn = (By.NAME, 'login-button')  #Локатор по Name для элемента кнопка Login
 
     @allure.step(r"Ввести логин и пароль")
-    def auth(self, login: str, password: str) -> None:
-        self.find_element(*self.login).send_keys(login)
-        self.find_element(*self.password).send_keys(password)
-        self.find_element(*self.login_btn).click()
+    def auth(self) -> None:
+        # self.find_element(*self.login).send_keys(login)
+        # self.find_element(*self.password).send_keys(password)
+        # self.find_element(*self.login_btn).click()
+        self.fill_field(self.login, 'standard_user')
+        self.fill_field(self.password, 'secret_sauce')
+        self.click_element(self.login_btn)
