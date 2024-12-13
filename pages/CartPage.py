@@ -1,4 +1,5 @@
 import allure
+from selenium.common import NoSuchElementException
 
 from selenium.webdriver.common.by import By
 from pages.BasePage import BasePage
@@ -15,16 +16,20 @@ class CartPage(BasePage):
 
     @allure.step(r"Найти количество товаров")
     def number_of_products(self) -> int:
-        return len(self.find_elements(*self.item_list))
+        return len(self.get_text(*self.item_list))
 
     @allure.step(r"Получить значение названия товара")
     def get_title_product(self) -> str:
-        return self.find_element(*self.contains_product).text
+        return self.get_text(*self.contains_product)
 
     @allure.step(r"Кликнуть по кнопке checkout")
     def checkout_btn_click(self) -> None:
-        self.find_element(*self.checkout_btn).click()
+        self.click_element(self.checkout_btn)
 
     @allure.step(r"Получить цену товара")
     def find_price_product(self) -> float:
-        return float(self.find_element(*self.price_product).text[1:])
+        try:
+            return float(self.find_element(*self.price_product).text[1:])
+        except NoSuchElementException:
+            print("Элемент 'цена' не найден")
+

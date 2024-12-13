@@ -26,4 +26,4 @@ class CheckoutPage(BasePage):
 
     @allure.step(r"Кликнуть по кнопке continue")
     def continue_btn_click(self):
-        self.find_element(*self.continue_btn).click()
+        self.click_element(self.continue_btn)

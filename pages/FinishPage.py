@@ -17,16 +17,16 @@ class FinishPage(BasePage):
 
     @allure.step(r"Проверить наличие поля Checkout: Complete!")
     def check_title(self) -> str:
-        return self.find_element(*self.title_field).text
+        return self.get_text(*self.title_field)
 
     @allure.step(r"Получить заголовок Thank you for your order!")
     def get_complete_header(self) -> str:
-        return self.find_element(*self.complete_header).text
+        return self.get_text(*self.complete_header)
 
     @allure.step(r"Проверить наличие заголовка Your order has been dispatched, and will arrive just as fast as the pony can get there!")
     def get_complete_text(self) -> str:
-        return self.find_element(*self.complete_text).text
+        return self.get_text(*self.complete_text)
 
     @allure.step(r"Проверить наличие кнопки Back Home")
     def find_back_home_btn(self) -> WebElement:
-        return self.find_element(*self.back_home_btn)
+        return self.get_element(*self.back_home_btn)

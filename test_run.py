@@ -20,7 +20,7 @@ def test_est_1_login(driver):
 
     cart_page = CartPage(driver)
     with allure.step(r"Проверка количества товаров"):
-        assert cart_page.number_of_products() == 1
+        assert cart_page.number_of_products() == 1, "Количество товаров в CartPage не равно 1"
 
     with allure.step(r"Проверка названия содержимого "):
         assert cart_page.get_title_product() == "Sauce Labs Bolt T-Shirt", "Error, can't find product name"
@@ -36,7 +36,7 @@ def test_est_1_login(driver):
 
     overview_page = OverviewPage(driver)
     with allure.step(r"Проверка количества товаров"):
-        assert overview_page.number_of_products() == 1
+        assert overview_page.number_of_products() == 1, "Количество товаров в OverviewPage не равно 1"
 
     with allure.step(r"Проверка названия содержимого"):
         assert overview_page.find_contains_products()
@@ -78,7 +78,7 @@ def test_est_1_login(driver):
 
     finish_page = FinishPage(driver)
     with allure.step(r"Проверка наличия поля Checkout: Complete!"):
-        assert finish_page.check_title()
+        assert finish_page.check_title() == "Checkout: Complete!", "Поле Checkout: Complete! не найден"
 
     with allure.step(r"Проверка наличия заголовка Thank you for your order!"):
         assert finish_page.get_complete_header() == "Thank you for your order!", "Ожидаемый заголовок: Thank you for your order!"
@@ -87,4 +87,4 @@ def test_est_1_login(driver):
         assert finish_page.get_complete_text() == "Your order has been dispatched, and will arrive just as fast as the pony can get there!", "Ожидаемый заголовок: Your order has been dispatched, and will arrive just as fast as the pony can get there!"
 
     with allure.step(r"Проверка наличия кнопки Back Home"):
-        assert finish_page.find_back_home_btn()
+        assert finish_page.find_back_home_btn(), "Кнопка Back Home не найдена"

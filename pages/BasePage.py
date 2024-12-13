@@ -20,17 +20,46 @@ class BasePage:
                                message=f'Элементы {by, value} не найдены')
 
     def get_current_url(self) -> str:
+        """
+        Возвращает текущий url страницы.
+        :return: Текущий url страницы
+        """
         return self.driver.current_url
 
     def click_element(self, locator):
+        """
+        Выполняет клик по элементу.
+        :param locator: Локатор
+        :return:
+        """
         element = self.find_element(*locator)
         element.click()
 
     def fill_field(self, locator, value):
+        """
+        Заполняет поле.
+        :param locator: Локатор
+        :param value: Значение, которое нужно вписать
+        :return:
+        """
         field = self.find_element(*locator)
         field.clear()  # очищаем поле перед вводом
         field.send_keys(value)
 
-    def get_text(self, locator):
+    def get_text(self, locator) -> str:
+        """
+        Возвращает текст элемента.
+        :param locator: Локатор
+        :return: Текст Элемента
+        """
         element = self.find_element(*locator)
         return element.text
+
+    def get_element(self, locator) -> WebElement:
+        """
+        Возвращает элемент на странице
+        :param locator: Локатор
+        :return: элемент на странице
+        """
+        element = self.find_element(*locator)
+        return element
