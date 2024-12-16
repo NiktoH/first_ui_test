@@ -15,12 +15,12 @@ class CartPage(BasePage):
         self.checkout_btn = (By.XPATH, '//*[@id= "checkout"]')
 
     @allure.step(r"Найти количество товаров")
-    def number_of_products(self) -> int:
-        return len(self.get_text(*self.item_list))
+    def number_of_products(self):
+        return len(self.find_elements(*self.item_list))
 
     @allure.step(r"Получить значение названия товара")
     def get_title_product(self) -> str:
-        return self.get_text(*self.contains_product)
+        return self.get_text(self.contains_product)
 
     @allure.step(r"Кликнуть по кнопке checkout")
     def checkout_btn_click(self) -> None:

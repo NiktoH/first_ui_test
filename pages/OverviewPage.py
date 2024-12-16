@@ -24,65 +24,47 @@ class OverviewPage(BasePage):
 
     @allure.step(r"Найти заголовок Payment Information")
     def find_payment_information(self) -> str:
-        return self.get_text(*self.payment_information)
+        return self.get_text(self.payment_information)
 
     @allure.step(r"Найти значение SauceCard")
     def find_payment_value(self) -> str:
-        return self.get_text(*self.payment_value)
+        return self.get_text(self.payment_value)
 
     @allure.step(r"Найти заголовок Shipping information")
     def find_shipping_information(self) -> str:
-        return self.get_text(*self.shipping_information)
+        return self.get_text(self.shipping_information)
 
     @allure.step(r"Найти значение Free Pony Express Delivery")
     def find_shipping_value(self) -> str:
-        return self.get_text(*self.shipping_value)
+        return self.get_text(self.shipping_value)
 
     @allure.step(r"Найти итоговую цену")
     def find_price_total_information(self) -> str:
-        return self.get_text(*self.price_total_information)
+        return self.get_text(self.price_total_information)
 
     @allure.step(r"Найти цену предмета")
     def find_price_subtotal_information(self) -> str:
-        try:
-            return self.find_element(*self.price_subtotal_information).text[:11]
-        except NoSuchElementException:
-            print("Цена предмета не найдена")
+        return self.get_text(self.price_subtotal_information)[:11]
 
     @allure.step(r"Найти цену")
     def find_price_subtotal_value(self) -> float:
-        try:
-            return float(self.find_element(*self.price_subtotal_information).text[13:])
-        except NoSuchElementException:
-            print("Цена не найдена")
+            return float(self.get_text(self.price_subtotal_information)[13:])
 
     @allure.step(r"Найти налог")
     def find_tax_label(self) -> str:
-        try:
-           return self.find_element(*self.tax_label).text[:4]
-        except NoSuchElementException:
-            print("Налог не найден")
+           return self.get_text(self.tax_label)[:4]
 
     @allure.step(r"Найти цену налога")
     def find_price_tax_value(self) -> float:
-        try:
-            return float(self.find_element(*self.tax_label).text[6:])
-        except NoSuchElementException:
-            print("Цена налога не найдена")
+        return float(self.get_text(self.tax_label)[6:])
 
     @allure.step(r"Найти итог")
     def find_total_label(self) -> str:
-        try:
-            return self.find_element(*self.total_label).text[:6]
-        except NoSuchElementException:
-            print("Итог не найден")
+        return self.get_text(self.total_label)[:6]
 
     @allure.step(r"Найти цену итога")
     def find_price_total_value(self) -> float:
-        try:
-            return float(self.find_element(*self.total_label).text[8:])
-        except NoSuchElementException:
-            print("Цена итога не найдена")
+        return float(self.get_text(self.total_label)[8:])
 
     @allure.step(r"Кликнуть по кнопке finish")
     def finish_btn_click(self):
@@ -94,7 +76,4 @@ class OverviewPage(BasePage):
 
     @allure.step(r"Проверить, что товар содержит своё название")
     def find_contains_products(self) -> str:
-        try:
-            return self.find_element(*self.contains_product).text
-        except NoSuchElementException:
-            print("Ошибка! Товар не содержит своё название")
+        return self.get_text(self.contains_product)

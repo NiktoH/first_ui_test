@@ -39,7 +39,7 @@ def test_est_1_login(driver):
         assert overview_page.number_of_products() == 1, "Количество товаров в OverviewPage не равно 1"
 
     with allure.step(r"Проверка названия содержимого"):
-        assert overview_page.find_contains_products()
+        assert overview_page.find_contains_products() == "Sauce Labs Bolt T-Shirt", "Error, can't find T-Shirt"
 
     with allure.step(r"Поиск заголовка Payment Information"):
         assert overview_page.find_payment_information() == "Payment Information:", "Заголовок не найден"
